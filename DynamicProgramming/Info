@@ -1,0 +1,56 @@
+Dynamic Programming 
+
+The problem can be broken down into "overlapping subproblems" - smaller versions of the original problem that are re-used multiple times. 
+
+The problem has an "optimal substructure" - an optimal solution can be formed from optimal solutions to the overlapping subproblems of the original problem. 
+
+If you wanted to find the nth Fibonacci number F(n), you can break it down into smaller subproblems - find F(n−1) and F(n−2) instead.
+Then, adding the solutions to these subproblems together gives the answer to the original question, F(n−1) +F(n−2) =F(n),
+which means the problem has optimal substructure, since a solution F(n) to the original problem can be formed from the solutions to the subproblems.
+These subproblems are also overlapping - for example, we would need F(4) to calculate both F(5) and F(6). 
+
+ 
+
+There are two ways to implement a DP algorithm: 
+
+Bottom-up, also known as tabulation. 
+
+Top-down, also known as memoization. 
+
+Bottom-up is implemented with iteration and starts at the base cases. Let's use the Fibonacci sequence as an example again.
+The base cases for the Fibonacci sequence are F (0) =0 and F(1) = 1. With bottom-up, we would use these base cases to calculate F (2),
+and then use that result to calculate F (3), and so on all the way up to F(n). 
+
+// Pseudocode example for bottom-up 
+ 
+F = array of length (n + 1) 
+F [0] = 0 
+F [1] = 1 
+for i from 2 to n:  //iteration 
+    F[i] = F[i - 1] + F[i - 2] 
+
+ 
+
+Top-down is implemented with recursion and made efficient with memoization.
+If we wanted to find the nth Fibonacci number F(n), we try to compute this by finding F(n−1) and F(n−2).
+This defines a recursive pattern that will continue on until we reach the base cases F (0) =F (1) =1  
+
+// Pseudocode example for top-down 
+ 
+memo = HashMap //memoisation 
+Function F(integer i): 
+    if i is 0 or 1:  
+        return i 
+    if i doesn't exist in memo: 
+        memo[i] = F(i - 1) + F(i - 2) //recursion 
+    return memo[i] 
+
+ 
+
+When to use DP? 
+
+If a problem is asking for the maximum/minimum/longest/shortest of something, the number of ways to do something,
+or if it is possible to reach a certain point, it is probably greedy or DP 
+
+If the problem has constraints that cause decisions to affect other decisions, such as using one element prevents 
+the usage of other elements, then we should consider using dynamic programming to solve the problem 
